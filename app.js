@@ -1,6 +1,6 @@
 alert("aaaaa");
 
-const startBtn = document.getElementById(startBtn);
+const startBtn = document.getElementById("startBtn");
 const statusDiv = document.getElementById("status");
 const valX = document.getElementById("valX");
 const valY = document.getElementById("valY");
