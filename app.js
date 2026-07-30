@@ -1,4 +1,4 @@
-alart("aaaaa");
+alert("aaaaa");
 
 const startBtn = document.getElementById(startBtn);
 const statusDiv = document.getElementById("status");
