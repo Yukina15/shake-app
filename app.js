@@ -25,7 +25,7 @@ function onMotion(e) {
         maxPower.textContent = maxValue.toFixed(1);
     }
 
-    if(p > 20) {
+    if(p > 70) {
         document.body.classList.add("shaking");
     }else{
         document.body.classList.remove("shaking");
