@@ -1,4 +1,4 @@
-// alert("aaaaa");
+
 
 const startBtn = document.getElementById("startBtn");
 const statusDiv = document.getElementById("status");
@@ -34,6 +34,7 @@ function onMotion(e) {
 }
 
 startBtn.addEventListener("click",async () => {
+    alert("aaaaa");
     if(typeof DeviceMotionEvent.requestPermission === "function") {
         const res = await DeviceMotionEvent.requestPermission();
         if(res !== "granted") {
