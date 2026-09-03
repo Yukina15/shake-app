@@ -1,17 +1,36 @@
-alert("aaaaa");
+// alert("aaaaa");
 
 const startBtn = document.getElementById("startBtn");
 const statusDiv = document.getElementById("status");
-const valX = document.getElementById("valX");
-const valY = document.getElementById("valY");
-const valZ = document.getElementById("valZ");
+// const valX = document.getElementById("valX");
+// const valY = document.getElementById("valY");
+// const valZ = document.getElementById("valZ");
+const power = document.getElementById("power");
+const maxPower = document.getElementById("maxPower");
+
+let maxValue = 0;
 
 function onMotion(e) {
     const acc = e.accelerationIncludingGravity;
     if(!acc) return;
-    valX.textContent = acc.x;
-    valY.textContent = acc.y;
-    valZ.textContent = acc.z;
+
+    const p = Math.sqrt(acc.x * acc.x + acc.y * acc.y + acc.z * acc.z);
+    power.textContent = p.toFixed(1);
+    // valX.textContent = acc.x;
+    // valY.textContent = acc.y;
+    // valZ.textContent = acc.z;
+
+    if (p > maxValue) {
+        maxValue = p;
+        maxPower.textContent = maxValue.toFixed(1);
+    }
+
+    if(p > 20) {
+        document.body.classList.add("shaking");
+    }else{
+        document.body.classList.remove("shaking");
+    }
+
 }
 
 startBtn.addEventListener("click",async () => {
