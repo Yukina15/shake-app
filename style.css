@@ -29,3 +29,11 @@ button{
     color:#1d4ed8;
 }
 .shaking {background-color: #fde68a;}
+button{
+    font-size: 18px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    background-color: #3b82f6;
+    color:#ffffff;
+}

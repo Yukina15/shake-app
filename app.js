@@ -1,4 +1,4 @@
-
+alert("4")
 
 const startBtn = document.getElementById("startBtn");
 const statusDiv = document.getElementById("status");
@@ -7,6 +7,8 @@ const statusDiv = document.getElementById("status");
 // const valZ = document.getElementById("valZ");
 const power = document.getElementById("power");
 const maxPower = document.getElementById("maxPower");
+
+const resetBtn = document.getElementById("resetBtn");
 
 let maxValue = 0;
 
@@ -34,7 +36,6 @@ function onMotion(e) {
 }
 
 startBtn.addEventListener("click",async () => {
-    alert("aaaaa");
     if(typeof DeviceMotionEvent.requestPermission === "function") {
         const res = await DeviceMotionEvent.requestPermission();
         if(res !== "granted") {
@@ -44,4 +45,8 @@ startBtn.addEventListener("click",async () => {
     }
     window.addEventListener("devicemotion" ,onMotion);
     statusDiv.textContent = "計測中";
+});
+
+resetBtn.addEventListener("click",async () => {
+    maxValue = 0;
 });
