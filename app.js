@@ -22,12 +22,14 @@ function onMotion(e) {
     // valY.textContent = acc.y;
     // valZ.textContent = acc.z;
 
+    power.style.fontSize = (20 + p) + "px";
+
     if (p > maxValue) {
         maxValue = p;
         maxPower.textContent = maxValue.toFixed(1);
     }
 
-    if(p > 70) {
+    if(p > 30) {
         document.body.classList.add("shaking");
     }else{
         document.body.classList.remove("shaking");
