@@ -10,7 +10,14 @@ const maxPower = document.getElementById("maxPower");
 
 const resetBtn = document.getElementById("resetBtn");
 
+const countDiv = document.getElementById("count");
+const THRESHOLD = 25;
+const COOL_TIME = 300;
+
 let maxValue = 0;
+
+let count = 0;
+let lastTime = 0;
 
 function onMotion(e) {
     const acc = e.accelerationIncludingGravity;
@@ -22,7 +29,15 @@ function onMotion(e) {
     // valY.textContent = acc.y;
     // valZ.textContent = acc.z;
 
-    power.style.fontSize = (20 + p) + "px";
+    // power.style.fontSize = (20 + p) + "px";
+
+    const now = Date.now();
+
+    if (p > THRESHOLD && now - lastTime > COOL_TIME) {
+        count = count + 1;
+        countDiv.textContent = count;
+        lastTime = now;
+    }
 
     if (p > maxValue) {
         maxValue = p;
@@ -51,4 +66,8 @@ startBtn.addEventListener("click",async () => {
 
 resetBtn.addEventListener("click",async () => {
     maxValue = 0;
+
+    count = 0;
+    countDiv.textContent = count;
+
 });

@@ -37,3 +37,9 @@ button{
     background-color: #3b82f6;
     color:#ffffff;
 }
+
+#count {
+    font-size: 64dx;
+    font-weight: bold;
+    color: #000e8f;
+}
