@@ -1,4 +1,4 @@
-alert("3.31")
+alert("3.32")
 
 const startBtn = document.getElementById("startBtn");
 const statusDiv = document.getElementById("status");
@@ -39,6 +39,9 @@ function onMotion(e) {
         count = count + 1;
         countDiv.textContent = count;
         lastTime = now;
+        document.body.classList.add("shaking");
+    }else{
+        document.body.classList.remove("shaking");
     }
 
     if (p > maxValue) {
@@ -46,11 +49,6 @@ function onMotion(e) {
         maxPower.textContent = maxValue.toFixed(1);
     }
 
-    if(count ++) {
-        document.body.classList.add("shaking");
-    }else{
-        document.body.classList.remove("shaking");
-    }
 
     if (count % 10 === 0 && count > 0) {
         message.textContent = "この調子！！";
