@@ -1,4 +1,4 @@
-alert("3.2")
+alert("3.22")
 
 const startBtn = document.getElementById("startBtn");
 const statusDiv = document.getElementById("status");
