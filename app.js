@@ -1,4 +1,4 @@
-alert("3.22")
+alert("3.31")
 
 const startBtn = document.getElementById("startBtn");
 const statusDiv = document.getElementById("status");
@@ -46,7 +46,7 @@ function onMotion(e) {
         maxPower.textContent = maxValue.toFixed(1);
     }
 
-    if(p > 30) {
+    if(count ++) {
         document.body.classList.add("shaking");
     }else{
         document.body.classList.remove("shaking");
