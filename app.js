@@ -1,4 +1,4 @@
-alert("6")
+alert("3.2")
 
 const startBtn = document.getElementById("startBtn");
 const statusDiv = document.getElementById("status");
@@ -13,6 +13,8 @@ const resetBtn = document.getElementById("resetBtn");
 const countDiv = document.getElementById("count");
 const THRESHOLD = 25;
 const COOL_TIME = 300;
+
+const message = document.getElementById("message");
 
 let maxValue = 0;
 
@@ -48,6 +50,12 @@ function onMotion(e) {
         document.body.classList.add("shaking");
     }else{
         document.body.classList.remove("shaking");
+    }
+
+    if (count % 10 === 0) {
+        message.textContent = "この調子！！";
+    }else{
+        message.textContent = "頑張って！！";
     }
 
 }
