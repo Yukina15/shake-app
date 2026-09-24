@@ -82,7 +82,7 @@ function endGame() {
     if (count < 30) {
         messageDiv.textContent = "もう一回チャレンジ！";
     }
-    if ( 30 <= count < 50 ) {
+    if ( 30 <= count && count < 50 ) {
         messageDiv.textContent = "なかなかやるね";
     }
     if (50 <= count) {
