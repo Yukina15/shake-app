@@ -1,4 +1,4 @@
-alert("4.1")
+alert("4.2")
 
 const startBtn = document.getElementById("startBtn");
 const statusDiv = document.getElementById("status");
@@ -11,8 +11,8 @@ const maxPower = document.getElementById("maxPower");
 const resetBtn = document.getElementById("resetBtn");
 
 const countDiv = document.getElementById("count");
-const THRESHOLD = 25;
-const COOL_TIME = 300;
+const THRESHOLD = 10;
+const COOL_TIME = 250;
 
 const message = document.getElementById("message");
 
@@ -78,8 +78,15 @@ function endGame() {
         localStorage.setItem("shakeBest", count);
         bestDiv.textContent = count;
         messageDiv.textContent = "新記録！おめでとう！";
-    }else{
-        messageDiv.textContent = "記録は" + count + "回です";
+    }
+    if (count < 30) {
+        messageDiv.textContent = "もう一回チャレンジ！";
+    }
+    if ( 30 <= count < 50 ) {
+        messageDiv.textContent = "なかなかやるね";
+    }
+    if (50 <= count) {
+        messageDiv.textContent = "すごい！腕がちぎれる！";
     }
 }
 
