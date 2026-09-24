@@ -3,24 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>センサーの値を見る</title>
+<title>１０秒シェイク対決</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>センサーの値3.2</h1>
-    <button id="startBtn">センサー開始</button>
-    <p id="status">停止中</p>
+    <h1>１０秒シェイク対決1.0</h1>
+    <button id="startBtn">ゲームスタート</button>
+    <p id="status">スタートボタンを押してね</p>
     <div class="panel">
+        <p id="timer">10.0</p>
         <p id="count">0</p>
-        <p>回振りました</p>
         <p id="message"></p>
-        <p id="power">0.0</p>
-        <p>最大値：<span id="maxPower">0.0</span></p>
-        <!-- <p>X:<span id="valX">-</span></p>
-        <p>Y:<span id="valY">-</span></p>
-        <p>Z:<span id="valZ">-</span></p> -->
+        <p>ハイスコア：<span id="best">0</span></p>
     </div>
-    <button id="resetBtn">リセット</button>
     <script src="app.js"></script>
 </body>
 </html>

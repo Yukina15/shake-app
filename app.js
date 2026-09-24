@@ -16,46 +16,71 @@ const COOL_TIME = 300;
 
 const message = document.getElementById("message");
 
+const timerDiv = document.getElementById("timer");
+const messageDiv = document.getElementById("message");
+const bestDiv = document.getElementById("best");
+const GAME_TIME = 10;
+
+let playing = false;
+let timeId = null;
+let endTime = 0;
+
+
+
+
 let maxValue = 0;
 
 let count = 0;
 let lastTime = 0;
 
 function onMotion(e) {
+    if (!playing) return;
     const acc = e.accelerationIncludingGravity;
     if(!acc) return;
 
     const p = Math.sqrt(acc.x * acc.x + acc.y * acc.y + acc.z * acc.z);
-    power.textContent = p.toFixed(1);
-    // valX.textContent = acc.x;
-    // valY.textContent = acc.y;
-    // valZ.textContent = acc.z;
-
-    // power.style.fontSize = (20 + p) + "px";
-
     const now = Date.now();
 
     if (p > THRESHOLD && now - lastTime > COOL_TIME) {
         count = count + 1;
         countDiv.textContent = count;
         lastTime = now;
-        document.body.classList.add("shaking");
+    };
+}
+
+function startGame() {
+    count = 0;
+    countDiv.textContent = 0;
+    messageDiv.textContent = "";
+    playing = true;
+    endTime = Date.now() + GAME_TIME * 1000;
+    statusDiv.textContent = "シェイク！！";
+    timeId = setInterval(updateTimer,100);
+}
+
+function updateTimer() {
+    const rest = (endTime - Date.now()) / 1000;
+    if (rest <= 0) {
+        timerDiv.textContent = "0.0";
+        endGame();
+        return;
+    }
+    timerDiv.textContent = rest.toFixed(1);
+}
+
+function endGame() {
+    playing = false;
+    clearInterval(timeId);
+    statusDiv.textContent = "終了！！";
+
+    const best = Number(localStorage.getItem("shakeBest")) || 0;
+    if (count > best) {
+        localStorage.setItem("shakeBest", count);
+        bestDiv.textContent = count;
+        messageDiv.textContent = "新記録！おめでとう！";
     }else{
-        document.body.classList.remove("shaking");
+        messageDiv.textContent = "記録は" + best + "回です";
     }
-
-    if (p > maxValue) {
-        maxValue = p;
-        maxPower.textContent = maxValue.toFixed(1);
-    }
-
-
-    if (count % 10 === 0 && count > 0) {
-        message.textContent = "この調子！！";
-    }else{
-        message.textContent = "頑張って！！";
-    }
-
 }
 
 startBtn.addEventListener("click",async () => {
@@ -67,13 +92,10 @@ startBtn.addEventListener("click",async () => {
         }
     }
     window.addEventListener("devicemotion" ,onMotion);
-    statusDiv.textContent = "計測中";
+    startGame();
 });
 
-resetBtn.addEventListener("click",async () => {
-    maxValue = 0;
-
-    count = 0;
-    countDiv.textContent = count;
-
+window.addEventListener("load",async () => {
+    bestDiv.textContent = Number(localStorage.getItem("shakeBest")) || 0;
+    timerDiv.textContent = GAME_TIME.toFixed(1);
 });
