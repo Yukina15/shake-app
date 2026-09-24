@@ -1,4 +1,4 @@
-alert("3.32")
+alert("4.1")
 
 const startBtn = document.getElementById("startBtn");
 const statusDiv = document.getElementById("status");
@@ -79,7 +79,7 @@ function endGame() {
         bestDiv.textContent = count;
         messageDiv.textContent = "新記録！おめでとう！";
     }else{
-        messageDiv.textContent = "記録は" + best + "回です";
+        messageDiv.textContent = "記録は" + count + "回です";
     }
 }
 
