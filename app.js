@@ -1,4 +1,4 @@
-alert("4.2")
+alert("4.3")
 
 const startBtn = document.getElementById("startBtn");
 const statusDiv = document.getElementById("status");
@@ -20,6 +20,7 @@ const timerDiv = document.getElementById("timer");
 const messageDiv = document.getElementById("message");
 const bestDiv = document.getElementById("best");
 const GAME_TIME = 10;
+
 
 let playing = false;
 let timeId = null;
@@ -100,6 +101,10 @@ startBtn.addEventListener("click",async () => {
     }
     window.addEventListener("devicemotion" ,onMotion);
     startGame();
+});
+
+resetBtn.addEventListener("click",async () => {
+    localStorage.removeItem("shakeBest");
 });
 
 window.addEventListener("load",async () => {
