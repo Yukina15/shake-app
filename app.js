@@ -106,6 +106,7 @@ startBtn.addEventListener("click",async () => {
 resetBtn.addEventListener("click",async () => {
     localStorage.removeItem("shakeBest");
     bestDiv.textContent = "0";
+    countDiv.textContent = 0;
 });
 
 window.addEventListener("load",async () => {
