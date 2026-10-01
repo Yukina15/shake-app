@@ -1,4 +1,4 @@
-alert("4.4.1")
+alert("4.5.1")
 
 const startBtn = document.getElementById("startBtn");
 const statusDiv = document.getElementById("status");
@@ -34,6 +34,10 @@ let maxValue = 0;
 let count = 0;
 let lastTime = 0;
 
+let player1 = 0;
+let player2 = 0;
+let playercount = 0;
+
 function onMotion(e) {
     if (!playing) return;
     const acc = e.accelerationIncludingGravity;
@@ -58,6 +62,7 @@ function startGame() {
     statusDiv.textContent = "シェイク！！";
     timeId = setInterval(updateTimer,100);
     startBtn.disabled = true;
+    playercount = playercount + 1;
 }
 
 function updateTimer() {
@@ -77,21 +82,41 @@ function endGame() {
 
     startBtn.disabled = false;
 
+    if (playercount == 1){
+        bestDiv.textContent = "１人目の記録：" + count;
+        player1 = count;
+    };
+    if (playercount == 2){
+        player2 = count;
+        if (player1 << player2){
+            messageDiv.textContent = "２人目の勝ち！！";
+        };
+        if (player1 >> player2){
+            messageDiv.textContent = "１人目の勝ち！！";
+        };
+        if (player1 == player2){
+            messageDiv.textContent = "引き分け！！";
+        };
+        playercount == 0;
+    };
+
+
+
     const best = Number(localStorage.getItem("shakeBest")) || 0;
-    if (count > best) {
-        localStorage.setItem("shakeBest", count);
-        bestDiv.textContent = count;
-        messageDiv.textContent = "新記録！おめでとう！";
-    }
-    if (count < 30) {
-        messageDiv.textContent = "もう一回チャレンジ！";
-    }
-    if ( 30 <= count && count < 50 ) {
-        messageDiv.textContent = "なかなかやるね";
-    }
-    if (50 <= count) {
-        messageDiv.textContent = "すごい！腕がちぎれる！";
-    }
+    // if (count > best) {
+    //     localStorage.setItem("shakeBest", count);
+    //     bestDiv.textContent = count;
+    //     messageDiv.textContent = "新記録！おめでとう！";
+    // }
+    // if (count < 30) {
+    //     messageDiv.textContent = "もう一回チャレンジ！";
+    // }
+    // if ( 30 <= count && count < 50 ) {
+    //     messageDiv.textContent = "なかなかやるね";
+    // }
+    // if (50 <= count) {
+    //     messageDiv.textContent = "すごい！腕がちぎれる！";
+    // }
 }
 
 startBtn.addEventListener("click",async () => {
@@ -108,11 +133,12 @@ startBtn.addEventListener("click",async () => {
 
 resetBtn.addEventListener("click",async () => {
     localStorage.removeItem("shakeBest");
-    bestDiv.textContent = "0";
+    bestDiv.textContent = "";
     countDiv.textContent = 0;
+    messageDiv.textContent="";
 });
 
 window.addEventListener("load",async () => {
-    bestDiv.textContent = Number(localStorage.getItem("shakeBest")) || 0;
+    // bestDiv.textContent = Number(localStorage.getItem("shakeBest")) || 0;
     timerDiv.textContent = GAME_TIME.toFixed(1);
 });
