@@ -1,4 +1,4 @@
-alert("4.3.3")
+alert("4.4.1")
 
 const startBtn = document.getElementById("startBtn");
 const statusDiv = document.getElementById("status");
@@ -57,6 +57,7 @@ function startGame() {
     endTime = Date.now() + GAME_TIME * 1000;
     statusDiv.textContent = "シェイク！！";
     timeId = setInterval(updateTimer,100);
+    startBtn.disabled = true;
 }
 
 function updateTimer() {
@@ -73,6 +74,8 @@ function endGame() {
     playing = false;
     clearInterval(timeId);
     statusDiv.textContent = "終了！！";
+
+    startBtn.disabled = false;
 
     const best = Number(localStorage.getItem("shakeBest")) || 0;
     if (count > best) {
