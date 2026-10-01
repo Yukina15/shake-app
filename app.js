@@ -1,4 +1,4 @@
-alert("4.3")
+alert("4.3.2")
 
 const startBtn = document.getElementById("startBtn");
 const statusDiv = document.getElementById("status");
@@ -105,6 +105,7 @@ startBtn.addEventListener("click",async () => {
 
 resetBtn.addEventListener("click",async () => {
     localStorage.removeItem("shakeBest");
+    bestDiv.textContent = "0";
 });
 
 window.addEventListener("load",async () => {
