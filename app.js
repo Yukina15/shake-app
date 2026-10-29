@@ -57,6 +57,7 @@ function startGame() {
     count = 0;
     countDiv.textContent = 0;
     messageDiv.textContent = "";
+    bestDiv.textContent="";
     playing = true;
     endTime = Date.now() + GAME_TIME * 1000;
     statusDiv.textContent = "シェイク！！";
@@ -98,6 +99,7 @@ function endGame() {
             messageDiv.textContent = "引き分け！！";
         };
         playercount = 0;
+        
     };
 
 
