@@ -88,16 +88,16 @@ function endGame() {
     };
     if (playercount == 2){
         player2 = count;
-        if (player1 << player2){
+        if (player1 < player2){
             messageDiv.textContent = "２人目の勝ち！！";
         };
-        if (player1 >> player2){
+        if (player1 > player2){
             messageDiv.textContent = "１人目の勝ち！！";
         };
         if (player1 == player2){
             messageDiv.textContent = "引き分け！！";
         };
-        playercount == 0;
+        playercount = 0;
     };
 
 
