@@ -6,13 +6,13 @@ const resetBtn = document.getElementById("resetBtn");
 const stepsDiv = document.getElementById("steps");
 const rateDiv = document.getElementById("rate");
 const barDiv = document.getElementById("bar");
-const distanceDiv = document.getElementById = ("distance");
+const distanceDiv = document.getElementById("distance");
 
 const STEP_HIGH = 11;
 const STEP_LOW = 10;
 const MIN_INTERVAL = 250;
 const GOAL = 1000;
-const STRIDE = 0.6;
+const STRIDE = 0.37;
 
 let steps = 0;
 let smoothed = 9.8;
