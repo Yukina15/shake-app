@@ -45,7 +45,7 @@ function updateDisplay() {
     const rate = Math.round(steps / GOAL * 100);
     rateDiv.textContent = rate;
     barDiv.style.width = Math.min(rate,100) + "%";
-    distanceDiv.textContent = Math.round(staps * STRIDE);
+    distanceDiv.textContent = Math.round(steps * STRIDE);
 }
 
 
