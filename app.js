@@ -1,125 +1,54 @@
-alert("4.5.4")
+alert("1.1")
 
 const startBtn = document.getElementById("startBtn");
 const statusDiv = document.getElementById("status");
-// const valX = document.getElementById("valX");
-// const valY = document.getElementById("valY");
-// const valZ = document.getElementById("valZ");
-const power = document.getElementById("power");
-const maxPower = document.getElementById("maxPower");
-
 const resetBtn = document.getElementById("resetBtn");
+const stepsDiv = document.getElementById("steps");
+const rateDiv = document.getElementById("rate");
+const barDiv = document.getElementById("bar");
+const distanceDiv = document.getElementById = ("distance");
 
-const countDiv = document.getElementById("count");
-const THRESHOLD = 10;
-const COOL_TIME = 250;
+const STEP_HIGH = 11;
+const STEP_LOW = 10;
+const MIN_INTERVAL = 250;
+const GOAL = 1000;
+const STRIDE = 0.6;
 
-const message = document.getElementById("message");
+let steps = 0;
+let smoothed = 9.8;
+let stepping = false;
+let lastStepTime = 0;
 
-const timerDiv = document.getElementById("timer");
-const messageDiv = document.getElementById("message");
-const bestDiv = document.getElementById("best");
-const GAME_TIME = 10;
-
-
-let playing = false;
-let timeId = null;
-let endTime = 0;
-
-
-
-
-let maxValue = 0;
-
-let count = 0;
-let lastTime = 0;
-
-let player1 = 0;
-let player2 = 0;
-let playercount = 0;
 
 function onMotion(e) {
-    if (!playing) return;
     const acc = e.accelerationIncludingGravity;
     if(!acc) return;
 
     const p = Math.sqrt(acc.x * acc.x + acc.y * acc.y + acc.z * acc.z);
+
+    smoothed = smoothed * 0.8 + p * 0.2;
+    
     const now = Date.now();
-
-    if (p > THRESHOLD && now - lastTime > COOL_TIME) {
-        count = count + 1;
-        countDiv.textContent = count;
-        lastTime = now;
-    };
-}
-
-function startGame() {
-    count = 0;
-    countDiv.textContent = 0;
-    messageDiv.textContent = "";
-    playing = true;
-    endTime = Date.now() + GAME_TIME * 1000;
-    statusDiv.textContent = "シェイク！！";
-    timeId = setInterval(updateTimer,100);
-    startBtn.disabled = true;
-    playercount = playercount + 1;
-}
-
-function updateTimer() {
-    const rest = (endTime - Date.now()) / 1000;
-    if (rest <= 0) {
-        timerDiv.textContent = "0.0";
-        endGame();
-        return;
+    if(!stepping && smoothed > STEP_HIGH && now - lastStepTime > MIN_INTERVAL) {
+        steps = steps + 1;
+        stepping = true;
+        lastStepTime = now;
+        updateDisplay();
     }
-    timerDiv.textContent = rest.toFixed(1);
+    if(stepping && smoothed < STEP_LOW) {
+        stepping = false;
+    }
 }
 
-function endGame() {
-    playing = false;
-    clearInterval(timeId);
-    statusDiv.textContent = "終了！！";
-
-    startBtn.disabled = false;
-
-    if (playercount == 1){
-        bestDiv.textContent = "１人目の記録：" + count;
-        player1 = count;
-    };
-    if (playercount == 2){
-        player2 = count;
-        if (player1 < player2){
-            messageDiv.textContent = "２人目の勝ち！！";
-        };
-        if (player1 > player2){
-            messageDiv.textContent = "１人目の勝ち！！";
-        };
-        if (player1 == player2){
-            messageDiv.textContent = "引き分け！！";
-        };
-        playercount = 0;
-        bestDiv.textContent="";
-        
-    };
-
-
-
-    const best = Number(localStorage.getItem("shakeBest")) || 0;
-    // if (count > best) {
-    //     localStorage.setItem("shakeBest", count);
-    //     bestDiv.textContent = count;
-    //     messageDiv.textContent = "新記録！おめでとう！";
-    // }
-    // if (count < 30) {
-    //     messageDiv.textContent = "もう一回チャレンジ！";
-    // }
-    // if ( 30 <= count && count < 50 ) {
-    //     messageDiv.textContent = "なかなかやるね";
-    // }
-    // if (50 <= count) {
-    //     messageDiv.textContent = "すごい！腕がちぎれる！";
-    // }
+function updateDisplay() {
+    stepsDiv.textContent = steps;
+    const rate = Math.round(steps / GOAL * 100);
+    rateDiv.textContent = rate;
+    barDiv.style.width = Math.min(rate,100) + "%";
+    distanceDiv.textContent = Math.round(staps * STRIDE);
 }
+
+
 
 startBtn.addEventListener("click",async () => {
     if(typeof DeviceMotionEvent.requestPermission === "function") {
@@ -130,17 +59,15 @@ startBtn.addEventListener("click",async () => {
         }
     }
     window.addEventListener("devicemotion" ,onMotion);
-    startGame();
+    statusDiv.textContent = "計測中";
 });
 
-resetBtn.addEventListener("click",async () => {
-    localStorage.removeItem("shakeBest");
-    bestDiv.textContent = "";
-    countDiv.textContent = 0;
-    messageDiv.textContent="";
+resetBtn.addEventListener("click", () => {
+    steps = 0;
+    updateDisplay();
 });
 
-window.addEventListener("load",async () => {
-    // bestDiv.textContent = Number(localStorage.getItem("shakeBest")) || 0;
-    timerDiv.textContent = GAME_TIME.toFixed(1);
+window.addEventListener("load", () => {
+    document.getElementById("goal").textContent = GOAL;
+    updateDisplay();
 });
