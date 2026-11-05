@@ -1,4 +1,4 @@
-alert("1.1")
+alert("1.2")
 
 const startBtn = document.getElementById("startBtn");
 const statusDiv = document.getElementById("status");
