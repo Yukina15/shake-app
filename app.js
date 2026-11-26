@@ -48,13 +48,13 @@ function updateDisplay() {
     barDiv.style.width = Math.min(rate,100) + "%";
     distanceDiv.textContent = Math.round(steps * STRIDE);
 
-    if(rate < 30) {
+    if(0 < rate && rate < 30) {
         message.textContent = "もっと頑張りましょう！";
     }
-    if(30 < rate && rate < 60) {
+    if(30 <= rate && rate < 60) {
         message.textContent = "その調子！！";
     }
-    if(60 < rate && rate <99) {
+    if(60 <= rate && rate < 100) {
         message.textContent = "いい感じ！！";
     }
     if(100 == rate) {
