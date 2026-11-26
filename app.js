@@ -57,7 +57,7 @@ function updateDisplay() {
     if(60 < rate && rate <99) {
         message.textContent = "いい感じ！！";
     }
-    if(99 < rate) {
+    if(100 == rate) {
         message.textContent = "完璧！！";
     };
 
