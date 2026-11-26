@@ -1,4 +1,4 @@
-alert("1.2")
+alert("1.3")
 
 const startBtn = document.getElementById("startBtn");
 const statusDiv = document.getElementById("status");
@@ -8,7 +8,7 @@ const rateDiv = document.getElementById("rate");
 const barDiv = document.getElementById("bar");
 const distanceDiv = document.getElementById("distance");
 
-const STEP_HIGH = 11;
+const STEP_HIGH = 12;
 const STEP_LOW = 10;
 const MIN_INTERVAL = 250;
 const GOAL = 1000;
