@@ -79,6 +79,7 @@ startBtn.addEventListener("click",async () => {
 
 resetBtn.addEventListener("click", () => {
     steps = 0;
+    message.textContent="";
     updateDisplay();
 });
 
