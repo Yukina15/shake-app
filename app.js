@@ -12,7 +12,7 @@ const message = document.getElementById("message");
 const STEP_HIGH = 11.5;
 const STEP_LOW = 10;
 const MIN_INTERVAL = 250;
-const GOAL = 100;
+const GOAL = 6000;
 const STRIDE = 0.40;
 
 let steps = 0;
